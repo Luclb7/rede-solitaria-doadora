@@ -70,8 +70,8 @@ referência ao doador
 referência ao beneficiário
 referência ao item
 
-Seu objetivo é manter o histórico das doações realizadas.
 ---------------------------------------------------------------------------------------------------------------------------------------------
-Diagrama de classe
+Diagrama de classe:
+
 <img width="571" height="501" alt="image" src="https://github.com/user-attachments/assets/e72d92ff-d1fc-4b7b-9b16-000253725cce" />
 
