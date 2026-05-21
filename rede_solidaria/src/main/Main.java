@@ -81,23 +81,18 @@ public class Main {
 
                     case 5:
 
-                        if (BancoDados.beneficiarios.isEmpty()
-                                || BancoDados.itens.isEmpty()) {
+                        if (BancoDados.beneficiarios.isEmpty() || BancoDados.itens.isEmpty()) {
 
                             System.out.println("Cadastre beneficiários e itens primeiro.");
                             break;
                         }
-                        solicitacaoService.solicitarItem(
-                                BancoDados.beneficiarios.get(0),
-                                BancoDados.itens.get(0));
+                        solicitacaoService.solicitarItem(BancoDados.beneficiarios.get(0),BancoDados.itens.get(0));
 
                         break;
 
                     case 6:
 
-                        if (!BancoDados.itens.isEmpty()) {
-                            solicitacaoService.entregarItem(
-                                    BancoDados.itens.get(0));
+                        if (!BancoDados.itens.isEmpty()) {solicitacaoService.entregarItem(BancoDados.itens.get(0));
                         }
 
                         break;
