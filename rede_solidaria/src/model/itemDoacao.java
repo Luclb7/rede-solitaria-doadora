@@ -37,10 +37,6 @@ public class ItemDoacao {
 
     @Override
     public String toString() {
-        return "ID: " + id +
-                " | Nome: " + nome +
-                " | Categoria: " + categoria +
-                " | Quantidade: " + quantidade +
-                " | Status: " + status;
+        return "ID: " + id + " | Nome: " + nome +" | Categoria: " + categoria +" | Quantidade: " + quantidade +" | Status: " + status;
     }
 }
