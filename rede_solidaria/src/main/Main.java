@@ -47,8 +47,7 @@ public class Main {
                         System.out.print("Email: ");
                         String emailD = sc.nextLine();
 
-                        cadastroService.cadastrarDoador(
-                                new Doador(1, nomeD,"99999-9999",emailD, "Rua A"));
+                        cadastroService.cadastrarDoador(new Doador(1, nomeD,"99999-9999",emailD, "Rua A"));
 
                         break;
 
