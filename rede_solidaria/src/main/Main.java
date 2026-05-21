@@ -2,57 +2,115 @@ package main;
 
 import java.util.Scanner;
 import model.*;
-import service.CadastroService;
 import repository.BancoDados;
+import service.CadastroService;
+import service.SolicitacaoService;
 
 public class Main {
 
-    public static void main(String[] args) {
+            public static void main(String[] args) {            
 
         Scanner sc = new Scanner(System.in);
-        CadastroService service = new CadastroService();
 
-        int opcao;
+        CadastroService cadastroService = new CadastroService();
+        SolicitacaoService solicitacaoService = new SolicitacaoService();
+
+        int opcao;          
 
         do {
-            System.out.println("\n=== MENU ===");
+
+            System.out.println("\n===== MENU =====");
             System.out.println("1 - Cadastrar Doador");
-            System.out.println("2 - Cadastrar Beneficiario");
+            System.out.println("2 - Cadastrar Beneficiário");
             System.out.println("3 - Cadastrar Item");
-            System.out.println("4 - Listar Itens");
+            System.out.println("4 - Listar Itens Disponíveis");
+            System.out.println("5 - Solicitar Item");
+            System.out.println("6 - Entregar Item");
+            System.out.println("7 - Filtrar por Categoria");
             System.out.println("0 - Sair");
 
             opcao = sc.nextInt();
             sc.nextLine();
 
-            switch(opcao) {
-                case 1:
-                    System.out.print("Nome: ");
-                    String nomeD = sc.nextLine();
-                    service.cadastrarDoador(new Doador(1, nomeD, "", "", ""));
-                    break;
-
-                case 2:
-                    System.out.print("Nome: ");
-                    String nomeB = sc.nextLine();
-                    service.cadastrarBeneficiario(new Beneficiario(1, nomeB, "", "", "", "familia", 1));
-                    break;
-
-                case 3:
-                    System.out.print("Nome do item: ");
-                    String nomeI = sc.nextLine();
-                    service.cadastrarItem(new ItemDoacao(1, nomeI, "geral", 1));
-                    break;
-
-                case 4:
-                    for (ItemDoacao i : BancoDados.itens) {
-                        System.out.println(i.getNome());
-                    }
-                    break;
+            if (opcao < 0 || opcao > 7) {
+              System.out.println("Validação errada, tente novamente!");
             }
 
-        } while(opcao != 0);
 
+            switch (opcao) {
+
+                    case 1:
+
+                        System.out.print("Nome: ");
+                        String nomeD = sc.nextLine();
+
+                        System.out.print("Email: ");
+                        String emailD = sc.nextLine();
+
+                        cadastroService.cadastrarDoador(
+                                new Doador(1, nomeD,"99999-9999",emailD, "Rua A"));
+
+                        break;
+
+                    case 2:
+
+                        System.out.print("Nome: ");
+                        String nomeB = sc.nextLine();
+                        System.out.print("Email: ");
+                        String emailB = sc.nextLine();
+                        cadastroService.cadastrarBeneficiario(new Beneficiario(1,nomeB,"99999-9999",emailB,"Rua B","Familia",1));
+
+                        break;
+
+                    case 3:
+
+                        System.out.print("Nome do Item: ");
+                        String nomeItem = sc.nextLine();
+                        System.out.print("Categoria: ");
+                        String categoria = sc.nextLine();
+                        System.out.print("Quantidade: ");
+                        int quantidade = sc.nextInt();
+
+                        cadastroService.cadastrarItem(new ItemDoacao(1,nomeItem,categoria,quantidade));
+
+                        break;
+
+                    case 4:
+                       solicitacaoService.listarItensDisponiveis();
+                        break;
+
+                    case 5:
+
+                        if (BancoDados.beneficiarios.isEmpty()
+                                || BancoDados.itens.isEmpty()) {
+
+                            System.out.println("Cadastre beneficiários e itens primeiro.");
+                            break;
+                        }
+                        solicitacaoService.solicitarItem(
+                                BancoDados.beneficiarios.get(0),
+                                BancoDados.itens.get(0));
+
+                        break;
+
+                    case 6:
+
+                        if (!BancoDados.itens.isEmpty()) {
+                            solicitacaoService.entregarItem(
+                                    BancoDados.itens.get(0));
+                        }
+
+                        break;
+
+                    case 7:
+
+                        System.out.print("Categoria: ");
+                        String filtro = sc.nextLine();
+                        solicitacaoService.filtrarPorCategoria(filtro);
+                        break;
+                }
+
+        } while (opcao != 0);
         sc.close();
     }
 }
