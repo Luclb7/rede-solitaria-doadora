@@ -1,4 +1,5 @@
 package repository;
+
 public class IdGenerator {
  private static int usuarioId=1;
  private static int itemId=1;
