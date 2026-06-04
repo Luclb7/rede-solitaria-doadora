@@ -5,6 +5,7 @@ import model.*;
 import repository.BancoDados;
 import service.CadastroService;
 import service.SolicitacaoService;
+import service.RelatorioService;
 
 public class Main {
 
@@ -14,6 +15,7 @@ public class Main {
 
         CadastroService cadastroService = new CadastroService();
         SolicitacaoService solicitacaoService = new SolicitacaoService();
+        RelatorioService relatorioService = new RelatorioService();
 
         int opcao;          
 
@@ -27,6 +29,9 @@ public class Main {
             System.out.println("5 - Solicitar Item");
             System.out.println("6 - Entregar Item");
             System.out.println("7 - Filtrar por Categoria");
+            System.out.println("8 - PDF Historico de Doacoes");
+            System.out.println("9 - PDF Itens Entregues");
+            System.out.println("10 - PDF Solicitacoes");
             System.out.println("0 - Sair");
 
             opcao = sc.nextInt();
@@ -44,10 +49,16 @@ public class Main {
                         System.out.print("Nome: ");
                         String nomeD = sc.nextLine();
 
+                        System.out.print("Telefone: ");
+                        String telefoneD = sc.nextLine();
+
                         System.out.print("Email: ");
                         String emailD = sc.nextLine();
 
-                        cadastroService.cadastrarDoador(new Doador(1, nomeD,"99999-9999",emailD, "Rua A"));
+                        System.out.print("Endereço: ");
+                        String enderecoD = sc.nextLine();
+
+                        cadastroService.cadastrarDoador(new Doador(1, nomeD, telefoneD, emailD, enderecoD));
 
                         break;
 
@@ -55,9 +66,13 @@ public class Main {
 
                         System.out.print("Nome: ");
                         String nomeB = sc.nextLine();
+                        System.out.print("Telefone: ");
+                        String telefoneB = sc.nextLine();
                         System.out.print("Email: ");
                         String emailB = sc.nextLine();
-                        cadastroService.cadastrarBeneficiario(new Beneficiario(1,nomeB,"99999-9999",emailB,"Rua B","Familia",1));
+                        System.out.print("Endereço: ");
+                        String enderecoB = sc.nextLine();
+                        cadastroService.cadastrarBeneficiario(new Beneficiario(1, nomeB, telefoneB, emailB, enderecoB, "Familia", 1));
 
                         break;
 
@@ -102,9 +117,25 @@ public class Main {
                         String filtro = sc.nextLine();
                         solicitacaoService.filtrarPorCategoria(filtro);
                         break;
+
+                    case 8:
+                        relatorioService.gerarHistoricoDoacoesPDF();
+                        System.out.println("PDF gerado.");
+                        break;
+
+                    case 9:
+                        relatorioService.gerarItensEntreguesPDF();
+                        System.out.println("PDF gerado.");
+                        break;
+
+                    case 10:
+                        relatorioService.gerarSolicitacoesPDF();
+                        System.out.println("PDF gerado.");
+                        break;
                 }
 
         } while (opcao != 0);
         sc.close();
     }
 }
+
