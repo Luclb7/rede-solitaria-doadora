@@ -73,5 +73,4 @@ referência ao item
 ---------------------------------------------------------------------------------------------------------------------------------------------
 Diagrama de classe:
 
-<img width="571" height="501" alt="image" src="https://github.com/user-attachments/assets/e72d92ff-d1fc-4b7b-9b16-000253725cce" />
-
+<img width="3575" height="2526" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/6e92be30-0654-4c2c-a922-5b371ad314cc" />
